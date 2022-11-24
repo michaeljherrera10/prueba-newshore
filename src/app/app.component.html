@@ -1,1 +1,31 @@
-<button class="btn btn-danger">prueba</button>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-3"><img src="https://www.newshore.es/media/1411/newshore-by_flyr-logo.svg" alt=""></div>
+        <div class="col-6">
+          <label class="fs-3">PRUEBA TECNICA (DESARROLLADOR FRONT-END)</label>
+        </div>
+    </div>
+    <div>
+        <div class="card p-3">
+            <div class="row">
+              <div class="col" >
+                <input class="col-6 border-white text-uppercase form-control" (change)="capturarOrigen($event)" list="datalistOptions" type="text" maxlength="3" placeholder="Origen"><i class="fa fa-plane" aria-hidden="true"></i>
+                <datalist id="datalistOptions">
+                  <option [value]="data.departureStation"  *ngFor="let data of routeList;"></option>
+                </datalist>
+              </div>
+              <div class="col">
+                <input class="col-6 border-white text-uppercase form-control" (change)="capturarDestino($event)" list="datalistOptions2" maxlength="3" type="text" placeholder="Destino">
+                <datalist id="datalistOptions2">
+                  <option [value]="data.arrivalStation" *ngFor="let data of routeList;"></option>
+                </datalist>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card my-3">
+    
+</div>
+

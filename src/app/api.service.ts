@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
+  length: number;
   
   constructor(private httpClient: HttpClient) { }
 

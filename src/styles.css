@@ -1,9 +1,28 @@
 html, body {
     height: 100%; 
     background: transparent;
-    color: #0D4D64
+    color:#151E3B
    }
 
 input{
     border: none;
+}
+
+.bottom-right{
+    position: absolute;
+}
+
+.rounded-pill{
+    color: #fff;
+    background:  #151E3B;;
+}
+
+.rounded-pill:hover{
+    background:#FF4833 ;
+    color: #fff;
+}
+
+.img{
+    width: 30px;
+    height: 30px;
 }

@@ -16,6 +16,10 @@ export class AppComponent {
   checkoutForm: FormGroup;
   submitted: boolean;
   rutaOrigen: any;
+  ruta:any[] = [];
+  rutaCompuesta: any[];
+  escala: any[];
+  rutaDestino: any[];
 
   
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
@@ -50,16 +54,41 @@ export class AppComponent {
   }
 
   bucarVuelo(){
-    let ruta = [];
+    this.ruta = [];
+    this.rutaOrigen = [];
+    this.rutaDestino = []
+    this.escala = []
+    
     for (let i = 0; i < this.routeList.length; i++) {
         // if (this.routeList[i].departureStation == this.origen ) {
         //     bigCities.push(this.routeList[i]);
         // }
         if(this.routeList[i].departureStation == this.origen && this.routeList[i].arrivalStation == this.destino){
-          ruta.push(this.routeList[i]);
+          this.ruta.push(this.routeList[i]);
+        }
+        if(this.routeList[i].departureStation == this.origen && this.routeList[i].arrivalStation != this.destino){
+          this.rutaOrigen.push(this.routeList[i]); 
+        }
+        if(this.routeList[i].departureStation != this.origen && this.routeList[i].arrivalStation == this.destino){
+          this.rutaDestino.push(this.routeList[i]);
         }
     }
-    console.log("ruta deseada", ruta);
+
+    for (var i = 0; i < this.rutaOrigen.length; i++) {
+        for (var j = 0; j <this.rutaDestino.length ; j++) {
+            if(this.rutaOrigen[i]['arrivalStation'] == this.rutaDestino[j]['departureStation']){
+              this.escala.push(this.rutaOrigen[i])
+              this.escala.push(this.rutaDestino[j])
+            }else {
+              // this.escala = []
+            }
+        }
+    }
+    
+    console.log("ruta directa", this.ruta);
+    console.log("ruta del origen", this.rutaOrigen);
+    console.log("ruta del destino", this.rutaDestino);
+    console.log("escala",this.escala);
   }
  
 }

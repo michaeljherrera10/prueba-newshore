@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-5">
       <div class="col-3"><img src="https://www.newshore.es/media/1411/newshore-by_flyr-logo.svg" ></div>
-      <div class="col-6">
+      <div class="col-8 text-center mt-2">
         <label class="fs-3">PRUEBA TECNICA (DESARROLLADOR FRONT-END)</label>
       </div>
   </div>
@@ -13,31 +13,31 @@
   <div>
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" >
       <div>
-        <div class="card p-3" >
-          <div class="row">
+        <div class="card px-5 py-3 shadow" >
+          <div class="row pt-2">
             <div class="col-3 form-floating mb-3" >
-              <input type="text" class="border-white text-uppercase form-control " formControlName="origen" (change)="capturarOrigen($event)" list="datalistOptions"  [ngClass]="{'is-invalid': submitted && checkoutForm.get('origen').hasError('required') }" maxlength="3" placeholder="Origen">
+              <input type="text" class="form-control input-custom text-uppercase" id="floatingInput" formControlName="origen" (change)="capturarOrigen($event)" list="datalistOptions"  [ngClass]="{'is-invalid': submitted && checkoutForm.get('origen').hasError('required') }" maxlength="3" placeholder="Origen">
               <label for="floatingInput">ORIGEN</label>
               <datalist id="datalistOptions">
                 <option [value]="data.departureStation"  *ngFor="let data of routeList;"></option>
               </datalist>
               <div class="invalid-feedback" *ngIf="checkoutForm.get('origen').hasError('required')">Debe seleccionar el origen de su viaje</div>
             </div>
-            <div class="col-2">
+            <div class="col-2 mt-3">
               <img class="img" src="https://cdn-icons-png.flaticon.com/512/68/68380.png">
             </div>
             <div class="col-3 form-floating mb-3">
-              <input type="text"  class="border-white text-uppercase form-control" formControlName="destino" (change)="capturarDestino($event)" list="datalistOptions2" [ngClass]="{'is-invalid': submitted && checkoutForm.get('destino').hasError('required') }" maxlength="3" placeholder="Destino">
-              <label for="floatingInput">DESTINO</label>
+              <input type="text"  class="form-control input-custom text-uppercase" id="floatingInput2" formControlName="destino" (change)="capturarDestino($event)" list="datalistOptions2" [ngClass]="{'is-invalid': submitted && checkoutForm.get('destino').hasError('required') }" maxlength="3" placeholder="Destino">
+              <label for="floatingInput2">DESTINO</label>
               <datalist id="datalistOptions2">
                 <option [value]="data.arrivalStation" *ngFor="let data of routeList;"></option>
               </datalist>
               <div class="invalid-feedback" *ngIf="checkoutForm.get('destino').hasError('required')">Debe seleccionar el destino de su viaje</div>
             </div>
-            <div class="col-2">
+            <div class="col-2 mt-3">
               <img class="img" src="https://cdn-icons-png.flaticon.com/512/68/68542.png">
             </div>
-            <div class="col-2">
+            <div class="col-2 mt-3">
               <button type="submit" class="btn rounded-pill mb-3 px-5" (click)="bucarVuelo()" >Buscar</button>
             </div>
           </div>
@@ -47,28 +47,40 @@
   </div>   
   <div class="card mt-5" >
     <div>
-      <label class="fs-4" for="informacion">Informacion del vuelo</label>
+      <label class="fs-4 pt-2 ms-3"for="informacion">Informacion del vuelo</label>
     </div>
-    <div class="row" *ngFor="let data of ruta;">
-      <div class="col origen">{{data.departureStation}} </div>
-      <div class="col destino" >{{data.arrivalStation}}</div>
-      <div class="col pais">{{data.flightCarrier}}</div>
-      <div class="col numero de vuelo">{{data.flightNumber}}</div>
-      <div class="col precio">{{data.price}}</div>
+    <div class="row mb-4 mx-4" *ngFor="let data of ruta;">
+      <div class="col-12 numeroDeVuelo fs-6">Vuelo:{{data.flightNumber}} </div>
+      <div class="col-1 origen fs-4 text-center">{{data.departureStation}} </div>
+      <div class="col-3"><hr size="2px" /></div>
+      <div class="col-1 text-center">
+        <img class="img " src="https://cdn-icons-png.flaticon.com/512/68/68380.png">
+      </div>
+      <div class="col-3"><hr size="2px" /></div>
+      <div class="col-1 destino fs-4 text-center" >{{data.arrivalStation}}</div>
+      <div class="col-3 precio fs-4 border-start text-center">{{data.price}}</div>
     </div>
     <div>
-      <div class="row" *ngFor="let data of escala;">
-        <div class="col origen">{{data.departureStation}} </div>
-        <div class="col destino" >{{data.arrivalStation}}</div>
-        <div class="col pais">{{data.flightCarrier}}</div>
-        <div class="col numero de vuelo">{{data.flightNumber}}</div>
-        <div class="col precio">{{data.price}}</div>
+      <div class="row mx-4 mb-3 pb-4" *ngFor="let data of escala;">
+        <div class="col-12 numeroDeVuelo fs-6">Vuelo:{{data.flightNumber}} </div>
+        <div class="col-1 origen fs-4 text-center">{{data.departureStation}} </div>
+        <div class="col-3"><hr size="2px" /></div>
+        <div class="col-1 text-center">
+          <img class="img " src="https://cdn-icons-png.flaticon.com/512/68/68380.png">
+        </div>
+        <div class="col-3"><hr size="2px" /></div>
+        <div class="col-1 destino fs-4 text-center" >{{data.arrivalStation}}</div>
+        <div class="col-3 precio fs-4 border-start text-center">{{data.price}}</div>  
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- <div class="col-12 numeroDeVuelo fs-6">{{data.flightNumber}}</div>
+        <div class="col origen fs-4">{{data.departureStation}} </div>
+        <div class="col destino fs-4" >{{data.arrivalStation}}</div>
+        <div class="col-3 precio fs-4">{{data.price}}</div> -->
 
 
 

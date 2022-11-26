@@ -1,11 +1,24 @@
 html, body {
     height: 100%; 
-    background: transparent;
+    background: #fbf9f9;
     color:#151E3B
    }
 
-input{
+.form-floating .input-custom{
+    border-radius: 0px;
     border: none;
+}
+
+.form-floating .input-custom:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+    border-bottom: 1px solid #151E3B ;
+   
+}
+
+.form-floating>.form-control:focus~label{
+    color: #151E3B;
 }
 
 .bottom-right{
@@ -25,4 +38,7 @@ input{
 .img{
     width: 30px;
     height: 30px;
+}
+.numeroDeVuelo{
+    margin-left: 26em;
 }

@@ -59,7 +59,7 @@
         </div>
         <div class="col-3"><hr size="2px" /></div>
         <div class="col-1 destino fs-4 text-center" >{{lista.Destination}}</div>
-        <div class="col-3 precio fs-4 border-start text-center">{{lista.Price}}</div>  
+        <div class="col-3 precio fs-4 border-start text-center">{{lista.Price | currency:'USD':'symbol' }}</div>  
       </div>
     </div>
   </div>

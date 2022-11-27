@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Journey, JourneyData } from './model/flight';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,17 @@ export class ApiService {
   }
 
   buscarVuelos(data: any){
-    return new Promise((resolve, reject) => {
+    return new Promise<Journey>((resolve, reject) => {
       if(data.Origin && data.Destination){
         let rutaOrigen = [];
         let rutaDestino = []
     
-        let respuesta = {
+        let respuesta: Journey= {
           "Journey": {
             "Origin": data.Origin,
-            "Destination": data.Destination
+            "Destination": data.Destination,
+            "Price":0,
+            "Flights":[]
           }    
         }
     

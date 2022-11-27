@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ApiService } from './api.service';
 import { FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
+import { Flight, Journey } from './model/flight';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AppComponent {
   sinRuta: boolean = true
   buscar: boolean = false
   total: any;
-  listadoVuelo: any[] = []
+  listadoVuelo: Flight[] = [];
 
   
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
@@ -67,7 +68,7 @@ export class AppComponent {
       Destination: this.destino
     }
     
-    this.apiService.buscarVuelos(obj).then((data) =>{
+    this.apiService.buscarVuelos(obj).then((data: Journey) =>{
       let response = data;
       console.log("response", response)
       this.listadoVuelo = response['Journey']['Flights']

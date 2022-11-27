@@ -1,15 +1,17 @@
-<div class="container">
+<div class="container mt-1">
+  <div class="row col-1 offset-11">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="moneda" (change)="cambiarMoneda(moneda)">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="COP">COP</option>
+    </select>
+  </div>
   <div class="row my-5">
       <div class="col-3"><img src="https://www.newshore.es/media/1411/newshore-by_flyr-logo.svg" ></div>
       <div class="col-8 text-center mt-2">
         <label class="fs-3">PRUEBA TECNICA (DESARROLLADOR FRONT-END)</label>
       </div>
   </div>
-
-  <!-- <div class="container ">
-    <img  class="img-fluid rounded" src="https://www.newshore.es/media/1067/whatwedo_01.jpg" >
-  </div> -->
-
   <div>
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" >
       <div>
@@ -45,9 +47,9 @@
       </div>
     </form>
   </div>   
-  <div class="card mt-5" *ngIf="listadoVuelo.length > 0 && buscar == true">
+  <div class="card mt-5 shadow-sm" *ngIf="listadoVuelo.length > 0 && buscar == true">
     <div>
-      <label class="fs-4 pt-2 ms-3" for="informacion">Informacion del vuelo</label>
+      <label class="fs-4 pt-3 pb-3 ms-4 informacion" for="informacion">Informacion del vuelo</label>
     </div>
     <div>
       <div class="row mx-5 mb-3 pb-4" *ngFor="let lista of listadoVuelo">
@@ -59,15 +61,19 @@
         </div>
         <div class="col-3"><hr size="2px" /></div>
         <div class="col-1 destino fs-4 text-center" >{{lista.Destination}}</div>
-        <div class="col-3 precio fs-4 border-start text-center">{{lista.Price | currency:'USD':'symbol' }}</div>  
+        <div class="col-3 precio fs-4 border-start text-center">{{lista.Price |currency:moneda:'symbol'}}</div>  
       </div>
     </div>
-  </div>
-  <div class="card mt-5" *ngIf="listadoVuelo.length == 0 && buscar == true" >
-    <div>
-      <label class="fs-4 pt-2 ms-3" for="informacion">Informacion del vuelo</label>
+    <div class="row offset-9 mb-2">
+      <div class="col-5  fs-4"> Total:</div>
+      <div class="col-4 mt-1 fs-5">  {{informacionVuelo.Journey.Price |currency:moneda:'symbol'}}</div>
     </div>
-  <label class="fs-4 mx-3 mb-2 py-2">No se encuentra el destino en nuestra ruta</label>
+  </div>
+  <div class="card mt-5 shadow-sm" *ngIf="listadoVuelo.length == 0 && buscar == true" >
+    <div>
+      <label class="fs-4 pt-3 pb-3 ms-4 informacion" for="informacion">Informacion del vuelo</label>
+    </div>
+  <label class="fs-4 mx-4 mb-2 py-2">No se encuentra el destino en nuestra ruta</label>
   </div>
 </div>
 

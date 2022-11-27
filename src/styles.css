@@ -40,5 +40,9 @@ html, body {
     height: 30px;
 }
 .numeroDeVuelo{
-    margin-left: 26em;
+    margin-left: 25em;
+}
+
+.informacion{
+    font-weight: 500;
 }

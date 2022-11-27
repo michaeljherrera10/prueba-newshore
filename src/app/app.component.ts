@@ -27,6 +27,10 @@ export class AppComponent {
   buscar: boolean = false
   total: any;
   listadoVuelo: Flight[] = [];
+  informacionVuelo: Journey;
+  moneda: string = "USD";
+  informacionVueloCopia: any;
+
 
   
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
@@ -69,13 +73,39 @@ export class AppComponent {
     }
     
     this.apiService.buscarVuelos(obj).then((data: Journey) =>{
-      let response = data;
-      console.log("response", response)
-      this.listadoVuelo = response['Journey']['Flights']
-      console.log("listadoVuelo", this.listadoVuelo)
+      this.informacionVuelo = data;
+      this.informacionVueloCopia = JSON.stringify(data);
+      this.listadoVuelo = this.informacionVuelo['Journey']['Flights']
     }).catch((error)=>{
       console.log("error", error)
     })
+  }
+
+  cambiarMoneda(moneda: string){
+    if(moneda === "EUR"){
+      let copiaVuelo = JSON.parse(this.informacionVueloCopia);
+      this.informacionVuelo.Journey.Price = copiaVuelo.Journey.Price * 1.03;
+      console.log("precio euros", copiaVuelo.Journey.Price);
+      for (let i = 0; i < this.informacionVuelo.Journey.Flights.length; i++) {
+        this.informacionVuelo.Journey.Flights[i].Price =  copiaVuelo.Journey.Flights[i].Price * 1.03;
+      }
+    }
+
+    if(moneda === "COP"){
+      let copiaVuelo = JSON.parse(this.informacionVueloCopia);
+      this.informacionVuelo.Journey.Price = copiaVuelo.Journey.Price * 4000 ;
+      for (let i = 0; i < this.informacionVuelo.Journey.Flights.length; i++) {
+        this.informacionVuelo.Journey.Flights[i].Price =  copiaVuelo.Journey.Flights[i].Price * 4000;
+      }
+    }
+
+    if(moneda === "USD"){
+      let copiaVuelo = JSON.parse(this.informacionVueloCopia);
+      this.informacionVuelo.Journey.Price = copiaVuelo.Journey.Price;
+      for (let i = 0; i < this.informacionVuelo.Journey.Flights.length; i++) {
+        this.informacionVuelo.Journey.Flights[i].Price =  copiaVuelo.Journey.Flights[i].Price;
+      }
+    }
   }
  
 }

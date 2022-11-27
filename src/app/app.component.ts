@@ -16,10 +16,16 @@ export class AppComponent {
   checkoutForm: FormGroup;
   submitted: boolean;
   rutaOrigen: any;
-  ruta:any[] = [];
+  directo:any[] = [];
   rutaCompuesta: any[];
   escala: any[];
   rutaDestino: any[];
+  rutaDirecta: boolean = true
+  rutaEscala: boolean = true
+  sinRuta: boolean = true
+  buscar: boolean = false
+  total: any;
+  listadoVuelo: any[] = []
 
   
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
@@ -35,6 +41,7 @@ export class AppComponent {
   dataApi(){
     this.apiService.getRoute().subscribe((data)=>{
       this.routeList = data;
+      this.apiService.listadoVuelos = data;
       console.log(this.routeList);
     });
   }
@@ -54,41 +61,20 @@ export class AppComponent {
   }
 
   bucarVuelo(){
-    this.ruta = [];
-    this.rutaOrigen = [];
-    this.rutaDestino = []
-    this.escala = []
-    
-    for (let i = 0; i < this.routeList.length; i++) {
-        // if (this.routeList[i].departureStation == this.origen ) {
-        //     bigCities.push(this.routeList[i]);
-        // }
-        if(this.routeList[i].departureStation == this.origen && this.routeList[i].arrivalStation == this.destino){
-          this.ruta.push(this.routeList[i]);
-        }
-        if(this.routeList[i].departureStation == this.origen && this.routeList[i].arrivalStation != this.destino){
-          this.rutaOrigen.push(this.routeList[i]); 
-        }
-        if(this.routeList[i].departureStation != this.origen && this.routeList[i].arrivalStation == this.destino){
-          this.rutaDestino.push(this.routeList[i]);
-        }
-    }
-
-    for (var i = 0; i < this.rutaOrigen.length; i++) {
-        for (var j = 0; j <this.rutaDestino.length ; j++) {
-            if(this.rutaOrigen[i]['arrivalStation'] == this.rutaDestino[j]['departureStation']){
-              this.escala.push(this.rutaOrigen[i])
-              this.escala.push(this.rutaDestino[j])
-            }else {
-              // this.escala = []
-            }
-        }
+    this.buscar = true;
+    let obj = {
+      Origin: this.origen,
+      Destination: this.destino
     }
     
-    console.log("ruta directa", this.ruta);
-    console.log("ruta del origen", this.rutaOrigen);
-    console.log("ruta del destino", this.rutaDestino);
-    console.log("escala",this.escala);
+    this.apiService.buscarVuelos(obj).then((data) =>{
+      let response = data;
+      console.log("response", response)
+      this.listadoVuelo = response['Journey']['Flights']
+      console.log("listadoVuelo", this.listadoVuelo)
+    }).catch((error)=>{
+      console.log("error", error)
+    })
   }
  
 }

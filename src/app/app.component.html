@@ -45,42 +45,33 @@
       </div>
     </form>
   </div>   
-  <div class="card mt-5" >
+  <div class="card mt-5" *ngIf="listadoVuelo.length > 0 && buscar == true">
     <div>
-      <label class="fs-4 pt-2 ms-3"for="informacion">Informacion del vuelo</label>
-    </div>
-    <div class="row mb-4 mx-4" *ngFor="let data of ruta;">
-      <div class="col-12 numeroDeVuelo fs-6">Vuelo:{{data.flightNumber}} </div>
-      <div class="col-1 origen fs-4 text-center">{{data.departureStation}} </div>
-      <div class="col-3"><hr size="2px" /></div>
-      <div class="col-1 text-center">
-        <img class="img " src="https://cdn-icons-png.flaticon.com/512/68/68380.png">
-      </div>
-      <div class="col-3"><hr size="2px" /></div>
-      <div class="col-1 destino fs-4 text-center" >{{data.arrivalStation}}</div>
-      <div class="col-3 precio fs-4 border-start text-center">{{data.price}}</div>
+      <label class="fs-4 pt-2 ms-3" for="informacion">Informacion del vuelo</label>
     </div>
     <div>
-      <div class="row mx-4 mb-3 pb-4" *ngFor="let data of escala;">
-        <div class="col-12 numeroDeVuelo fs-6">Vuelo:{{data.flightNumber}} </div>
-        <div class="col-1 origen fs-4 text-center">{{data.departureStation}} </div>
+      <div class="row mx-5 mb-3 pb-4" *ngFor="let lista of listadoVuelo">
+        <div class="col-12 numeroDeVuelo fs-6">Vuelo:{{lista.Transport.FlightNumber}} </div>
+        <div class="col-1 origen fs-4 text-center">{{lista.Origin }} </div>
         <div class="col-3"><hr size="2px" /></div>
         <div class="col-1 text-center">
           <img class="img " src="https://cdn-icons-png.flaticon.com/512/68/68380.png">
         </div>
         <div class="col-3"><hr size="2px" /></div>
-        <div class="col-1 destino fs-4 text-center" >{{data.arrivalStation}}</div>
-        <div class="col-3 precio fs-4 border-start text-center">{{data.price}}</div>  
+        <div class="col-1 destino fs-4 text-center" >{{lista.Destination}}</div>
+        <div class="col-3 precio fs-4 border-start text-center">{{lista.Price}}</div>  
       </div>
     </div>
+  </div>
+  <div class="card mt-5" *ngIf="listadoVuelo.length == 0 && buscar == true" >
+    <div>
+      <label class="fs-4 pt-2 ms-3" for="informacion">Informacion del vuelo</label>
+    </div>
+  <label class="fs-4 mx-3 mb-2 py-2">No se encuentra el destino en nuestra ruta</label>
   </div>
 </div>
 
 
-<!-- <div class="col-12 numeroDeVuelo fs-6">{{data.flightNumber}}</div>
-        <div class="col origen fs-4">{{data.departureStation}} </div>
-        <div class="col destino fs-4" >{{data.arrivalStation}}</div>
-        <div class="col-3 precio fs-4">{{data.price}}</div> -->
 
 
 
